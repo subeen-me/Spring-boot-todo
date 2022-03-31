@@ -23,7 +23,7 @@ public class TodoController {
     public String main(Model model) {
         List<Todo> todos = todoService.todoList();
         model.addAttribute("todo", todos);
-        return "main";
+        return "todoList";
     }
 
     @GetMapping("/todo/new")
