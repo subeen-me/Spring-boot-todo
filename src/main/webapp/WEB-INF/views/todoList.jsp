@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="com.todo.simpletodoapp.domain.TodoStatus" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
         <span class="navbar-brand mb-0 h1" onclick="location.href='/'"/>TODO-LIST</span>
-        <button type="button" class="btn btn-primary" onclick="location.href='/todo/new'" >Write</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/todo/new'">Write</button>
     </div>
 </nav>
 
@@ -23,47 +23,58 @@
     <div class="row">
         <div class="col">
             <div class="card-body">
-                <h5 class="card-title">TODO</h5>
+                <h5 class="card-title">TODO🧐</h5>
             </div>
-
             <c:forEach var="todo" items="${todo}">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">${todo.title}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
-                    <p class="card-text">${todo.name}</p>
-                    <button type="submit" class="btn btn-outline-primary" onclick="stateUpdate('${todo.status.val}')"> > </button>
-                </div>
-            </div>
+                <c:if test="${todo.status.val eq 'todo'}">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">${todo.title}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
+                            <p class="card-text">${todo.name}</p>
+                            <button type="submit" class="btn btn-outline-primary" onclick="stateUpdate('${todo.id}')"> >
+                            </button>
+                        </div>
+                    </div>
+                </c:if>
             </c:forEach>
+        </div>
 
+        <div class="col">
+            <div class="card-body">
+                <h5 class="card-title">DOING😆</h5>
+            </div>
+            <c:forEach var="todo" items="${todo}">
+                <c:if test="${todo.status.val eq 'doing'}">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">${todo.title}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
+                            <p class="card-text">${todo.name}</p>
+                            <button type="submit" class="btn btn-outline-primary" onclick="stateUpdate('${todo.id}')"> >
+                            </button>
+                        </div>
+                    </div>
+                </c:if>
+            </c:forEach>
         </div>
         <div class="col">
             <div class="card-body">
-                <h5 class="card-title">DOING</h5>
+                <h5 class="card-title">DONE😎</h5>
             </div>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <button type="button" class="btn btn-outline-primary"> > </button>
-                </div>
-            </div>
+            <c:forEach var="todo" items="${todo}">
+                <c:if test="${todo.status.val eq 'done'}">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">${todo.title}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
+                            <p class="card-text">${todo.name}</p>
+                        </div>
+                    </div>
+                </c:if>
+            </c:forEach>
         </div>
-        <div class="col">
-            <div class="card-body">
-                <h5 class="card-title">DONE</h5>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

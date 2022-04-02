@@ -25,4 +25,17 @@ public class TodoService {
     public List<Todo> todoList() {
         return todoRepository.findAll();
     }
+
+    @Transactional
+    public void statusUpdate(Long id) {
+        Todo findTodo = todoRepository.getById(id);
+        if(findTodo.getStatus().getVal() == "todo") {
+            findTodo.setStatus(TodoStatus.DOING);
+            System.out.println("doing 변경");
+        } else if(findTodo.getStatus().getVal() == "doing") {
+            findTodo.setStatus(TodoStatus.DONE);
+            System.out.println("done으로 변경");
+
+        }
+    }
 }
