@@ -69,6 +69,8 @@
                             <h5 class="card-title">${todo.title}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
                             <p class="card-text">${todo.name}</p>
+                            <button type="button" class="btn-close" style="float:right;" aria-label="Close"
+                                    onclick="todoDelete('${todo.id}')"></button>
                         </div>
                     </div>
                 </c:if>
