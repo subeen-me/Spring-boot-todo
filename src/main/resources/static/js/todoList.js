@@ -31,3 +31,30 @@ function todoDelete(id) {
         });
     }
 }
+
+function todoEdit(id) {
+    // let editModal = document.getElementById('editModal')
+    // let todoTitle = editModal.querySelector('#title')
+    // let todoName = editModal.querySelector('#name')
+
+    let data = {
+        title: $('#title').val(),
+        name: $('name').val()
+    };
+    console.log("edit 실행");
+
+    $.ajax({
+        type: "put",
+        url: `/todo/${id}/edit`,
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(res => {
+        console.log("수정 성공", res);
+        location.href = "/";
+    }).fail(error => {
+        console.log("수정 실패", error);
+    });
+
+
+}

@@ -46,6 +46,11 @@ public class TodoController {
         return "redirect:/";
     }
 
+    @PutMapping("/todo/{id}/edit")
+    public void edit(@PathVariable("id") Long id, Todo todo) {
+        todoService.todoEdit(id, todo);
+    }
+
     @ResponseBody
     @PostMapping("/todo/{id}/update")
     public void statusUpdate(@PathVariable("id") Long id) {
