@@ -28,13 +28,15 @@ public class TodoService {
     }
 
     @Transactional
-    public void todoEdit(Long id, Todo todo) {
+    public void todoEdit(Long id, TodoForm form) {
         Todo findTodo = todoRepository.findById(id)
                 .orElseThrow(()->{
                     return new IllegalArgumentException("todo 찾기 실패");
                 });
-        findTodo.setTitle(todo.getTitle());
-        findTodo.setName(todo.getName());
+        findTodo.setTitle(form.getTitle());
+        findTodo.setName(form.getName());
+        System.out.println(form.getTitle());
+        System.out.println(form.getName());
 
     }
 

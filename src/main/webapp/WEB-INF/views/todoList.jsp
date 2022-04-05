@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TODO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
@@ -32,10 +32,10 @@
                             <h5 class="card-title">${todo.title}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
                             <p class="card-text">${todo.name}</p>
-                            <button type="button" class="btn btn-outline-primary" onclick="todoEdit('${todo.id}')"
+                            <button type="button" class="btn btn-outline-primary"
                                     data-bs-toggle="modal" data-bs-target="#editModal">수정
                             </button>
-                            <button type="submit" class="btn btn-outline-primary"> >
+                            <button type="submit" class="btn btn-outline-primary" onclick="stateUpdate('${todo.id}')"> >
                             </button>
                             <!--수정 모달-->
                             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -60,13 +60,13 @@
                                                     <input type="text" class="form-control" id="name"
                                                            value="${todo.name}">
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                        닫기
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" onclick="todoEdit('${todo.id}')">저장</button>
+                                                </div>
                                             </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                닫기
-                                            </button>
-                                            <button type="button" class="btn btn-primary" onclick="stateUpdate('${todo.id}')">저장</button>
                                         </div>
                                     </div>
                                 </div>

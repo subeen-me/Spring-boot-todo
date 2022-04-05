@@ -1,6 +1,5 @@
 package com.todo.simpletodoapp.web;
 
-import com.todo.simpletodoapp.domain.TodoStatus;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

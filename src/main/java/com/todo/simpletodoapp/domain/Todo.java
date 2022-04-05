@@ -35,9 +35,18 @@ public class Todo {
     @CreatedDate
     private String createDate;
 
+    @CreatedDate
+    private String editDate;
+
     @PrePersist
     public void onPrePersist() {
         this.createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.editDate = this.createDate;
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        this.editDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
 }

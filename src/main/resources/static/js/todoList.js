@@ -37,21 +37,20 @@ function todoEdit(id) {
     // let todoTitle = editModal.querySelector('#title')
     // let todoName = editModal.querySelector('#name')
 
-    let data = {
+    let form = {
         title: $('#title').val(),
-        name: $('name').val()
+        name: $('#name').val()
     };
     console.log("edit 실행");
 
     $.ajax({
         type: "put",
         url: `/todo/${id}/edit`,
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        data: JSON.stringify(form),
+        contentType: "application/json; charset=utf-8"
     }).done(res => {
         console.log("수정 성공", res);
-        location.href = "/";
+        location.reload();
     }).fail(error => {
         console.log("수정 실패", error);
     });
