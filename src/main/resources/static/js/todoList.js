@@ -32,28 +32,60 @@ function todoDelete(id) {
     }
 }
 
-function todoEdit(id) {
-    // let editModal = document.getElementById('editModal')
-    // let todoTitle = editModal.querySelector('#title')
-    // let todoName = editModal.querySelector('#name')
+// function todoEdit(id) {
+//     // let editModal = document.getElementById('editModal')
+//     // let todoTitle = editModal.querySelector('#title')
+//     // let todoName = editModal.querySelector('#name')
+//
+//     let form = {
+//         title: $('#title').val(),
+//         name: $('#name').val()
+//     };
+//     console.log("edit 실행");
+//
+//     $.ajax({
+//         type: "put",
+//         url: `/todo/${id}/edit`,
+//         data: JSON.stringify(form),
+//         contentType: "application/json; charset=utf-8"
+//     }).done(res => {
+//         console.log("수정 성공", res);
+//         location.reload();
+//     }).fail(error => {
+//         console.log("수정 실패", error);
+//     });
+//
+//
+// }
 
-    let form = {
-        title: $('#title').val(),
-        name: $('#name').val()
-    };
-    console.log("edit 실행");
+// $("#editModal").on("click", function() {
+//     console.log("수정실행");
+//     let todo = $(this).parent();
+//
+//     let title = todo.find(".title").text();
+//     let name = todo.find(".name").text();
+//
+//     $("#title").val(title);
+//     $("#name").val(name);
+//
+// });
 
-    $.ajax({
-        type: "put",
-        url: `/todo/${id}/edit`,
-        data: JSON.stringify(form),
-        contentType: "application/json; charset=utf-8"
-    }).done(res => {
-        console.log("수정 성공", res);
-        location.reload();
-    }).fail(error => {
-        console.log("수정 실패", error);
-    });
+function editModal(id, title, name) {
+    console.log("수정 실행");
+    console.log(id);
 
+   // $("#title").val(title);
+  //  $("#name").val(name);
+
+    let todo_title = title;
+    let todo_name = name;
+
+    $('input[name=title]').attr('value',todo_title);
+    $('input[name=name]').attr('value',todo_name);
 
 }
+
+// $(document).ready(function () {
+//     $('#editModal').on()
+//
+// });

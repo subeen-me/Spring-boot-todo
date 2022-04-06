@@ -33,7 +33,7 @@
                             <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
                             <p class="card-text">${todo.name}</p>
                             <button type="button" class="btn btn-outline-primary"
-                                    data-bs-toggle="modal" data-bs-target="#editModal" onclick="editModal('{${todo.id},${todo.title},${todo.name}}')">수정
+                                    data-bs-toggle="modal" data-bs-target="#editModal">수정
                             </button>
                             <button type="submit" class="btn btn-outline-primary" onclick="stateUpdate('${todo.id}')"> >
                             </button>
@@ -50,19 +50,21 @@
                                         <div class="modal-body">
                                             <!--수정 form-->
                                             <form>
+                                                <input type="hidden" id="id" value="${todo.id}"/>
                                                 <div class="mb-3">
                                                     <label for="title" class="col-form-label">해야 할 일</label>
-                                                    <textarea class="form-control" id="title" name="title"></textarea>
+                                                    <textarea class="form-control" id="title">${todo.title}</textarea>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="name" class="col-form-label">이름</label>
-                                                    <input type="text" class="form-control" id="name" name="name">
+                                                    <input type="text" class="form-control" id="name"
+                                                           value="${todo.name}">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                         닫기
                                                     </button>
-                                                    <button type="button" class="btn btn-primary">저장</button>
+                                                    <button type="button" class="btn btn-primary" onclick="todoEdit('${todo.id}')">저장</button>
                                                 </div>
                                             </form>
                                         </div>
