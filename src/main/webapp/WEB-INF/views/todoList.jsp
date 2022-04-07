@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1" onclick="location.href='/'"/>TODO-LIST</span>
+        <a href="/" class="navbar-brand mb-0 h1" >TODO-LIST</a>
         <button type="button" class="btn btn-primary" onclick="location.href='/todo/new'">추가</button>
     </div>
 </nav>
@@ -33,43 +33,11 @@
                             <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
                             <p class="card-text">${todo.name}</p>
                             <button type="button" class="btn btn-outline-primary"
-                                    data-bs-toggle="modal" data-bs-target="#editModal" onclick="editModal('{${todo.id},${todo.title},${todo.name}}')">수정
+                                    data-bs-toggle="modal" data-bs-target="#editModal" data-id="${todo.id}" data-title="${todo.title}" data-name="${todo.name}" onclick="editModal(this)">수정
                             </button>
                             <button type="submit" class="btn btn-outline-primary" onclick="stateUpdate('${todo.id}')"> >
                             </button>
-                            <!--수정 모달-->
-                            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">내용 수정</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!--수정 form-->
-                                            <form>
-                                                <div class="mb-3">
-                                                    <label for="title" class="col-form-label">해야 할 일</label>
-                                                    <textarea class="form-control" id="title" name="title"></textarea>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="name" class="col-form-label">이름</label>
-                                                    <input type="text" class="form-control" id="name" name="name">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        닫기
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary">저장</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--수정 모달 end-->
+
                         </div>
                     </div>
                 </c:if>
@@ -87,6 +55,9 @@
                             <h5 class="card-title">${todo.title}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">${todo.createDate}</h6>
                             <p class="card-text">${todo.name}</p>
+                            <button type="button" class="btn btn-outline-primary"
+                                    data-bs-toggle="modal" data-bs-target="#editModal" data-id="${todo.id}" data-title="${todo.title}" data-name="${todo.name}" onclick="editModal(this)">수정
+                            </button>
                             <button type="submit" class="btn btn-outline-primary" onclick="stateUpdate('${todo.id}')"> >
                             </button>
                         </div>
@@ -115,6 +86,41 @@
 
     </div>
 </div>
+
+<!--수정 모달-->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">내용 수정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--수정 form-->
+                <form>
+                    <input type="hidden" id="id" value=""/>
+                    <div class="mb-3">
+                        <label for="title" class="col-form-label">해야 할 일</label>
+                        <textarea class="form-control" value="" id="title" name="title"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">이름</label>
+                        <input type="text" class="form-control" value="" id="name" name="name">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            닫기
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="todoEdit()">저장</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--수정 모달 end-->
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

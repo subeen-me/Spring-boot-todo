@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1" onclick="location.href='/'">TODO-LIST</span>
+        <a href="/" class="navbar-brand mb-0 h1">TODO-LIST</a>
     </div>
 </nav>
 
