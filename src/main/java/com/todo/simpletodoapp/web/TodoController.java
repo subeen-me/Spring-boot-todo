@@ -1,13 +1,16 @@
 package com.todo.simpletodoapp.web;
 
 import com.todo.simpletodoapp.TodoService;
+import com.todo.simpletodoapp.config.auth.dto.SessionUser;
 import com.todo.simpletodoapp.domain.Todo;
+import com.todo.simpletodoapp.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -16,10 +19,15 @@ import java.util.List;
 public class TodoController {
 
     private final TodoService todoService;
+    private final HttpSession httpSession;
 
-    @GetMapping({"/", "/todo"})
+    @GetMapping("/")
     public String main(Model model) {
         List<Todo> todos = todoService.todoList();
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if(user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         model.addAttribute("todo", todos);
         return "todoList";
     }

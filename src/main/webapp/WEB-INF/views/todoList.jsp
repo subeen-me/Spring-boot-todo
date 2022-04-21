@@ -15,6 +15,10 @@
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
         <a href="/" class="navbar-brand mb-0 h1" >TODO-LIST</a>
+        <c:if test="${userName !=null}">
+        <p class="card-text">${userName}</p>
+        </c:if>
+        <a href="/oauth2/authorization/google" class="btn btn-outline-primary" role="button">Google Login</a>
         <button type="button" class="btn btn-primary" onclick="location.href='/todo/new'">추가</button>
     </div>
 </nav>
