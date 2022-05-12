@@ -42,19 +42,17 @@ public class TodoController {
 
     @PostMapping("/todo/new")
     public String save(@Valid TodoForm form, BindingResult result) {
-        System.out.println("TodoController.save 호출됨");
-
         if(result.hasErrors()) {
             return "todoForm";
         }
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        String userName = user.getName();
+        String userEmail = user.getEmail();
 
         Todo todo = new Todo();
         todo.setName(form.getName());
         todo.setTitle(form.getTitle());
 
-        todoService.save(todo, userName);
+        todoService.save(todo, userEmail);
 
         return "redirect:/";
     }
@@ -63,21 +61,18 @@ public class TodoController {
     @PutMapping("/todo/{id}/edit")
     public void edit(@PathVariable("id") Long id,
                      @RequestBody TodoForm form) {
-        System.out.println("TodoController.edit 호출됨");
         todoService.todoEdit(id, form);
     }
 
     @ResponseBody
     @PostMapping("/todo/{id}/update")
     public void stateUpdate(@PathVariable("id") Long id) {
-        System.out.println("updateController 호출");
         todoService.stateUpdate(id);
     }
 
     @ResponseBody
     @DeleteMapping("/todo/{id}/delete")
     public void delete(@PathVariable("id") Long id) {
-        System.out.println("TodoController.delete 호출");
         todoService.delete(id);
     }
 }

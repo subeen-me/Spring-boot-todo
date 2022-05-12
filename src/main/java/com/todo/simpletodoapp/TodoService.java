@@ -16,10 +16,10 @@ public class TodoService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void save(Todo todo, String userName) {
+    public void save(Todo todo, String userEmail) {
         todo.setStatus(TodoStatus.TODO);
-        User user = userRepository.findByName(userName).orElseThrow(()->{
-            return new IllegalArgumentException("name 찾기 실패");
+        User user = userRepository.findByEmail(userEmail).orElseThrow(()->{
+            return new IllegalArgumentException("Email 찾기 실패");
         });
         todo.setUser(user);
         todoRepository.save(todo);
@@ -42,9 +42,6 @@ public class TodoService {
                 });
         findTodo.setTitle(form.getTitle());
         findTodo.setName(form.getName());
-        System.out.println(form.getTitle());
-        System.out.println(form.getName());
-
     }
 
     @Transactional
@@ -52,11 +49,8 @@ public class TodoService {
         Todo findTodo = todoRepository.getById(id);
         if(findTodo.getStatus().getVal() == "todo") {
             findTodo.setStatus(TodoStatus.DOING);
-            System.out.println("doing 변경");
         } else if(findTodo.getStatus().getVal() == "doing") {
             findTodo.setStatus(TodoStatus.DONE);
-            System.out.println("done으로 변경");
-
         }
     }
 
