@@ -26,8 +26,12 @@ public class TodoService {
     }
 
     @Transactional(readOnly = true)
-    public List<Todo> todoList() {
-        return todoRepository.findAll();
+    public List<Todo> todoList(String userEmail) {
+        User user = userRepository.findByEmail(userEmail).orElseThrow(()->{
+            return new IllegalArgumentException("Email 찾기 실패");
+        });
+        Long userId = user.getId();
+        return todoRepository.findAllByUserId(userId);
     }
 
     @Transactional

@@ -23,12 +23,14 @@ public class TodoController {
 
     @GetMapping("/")
     public String main(Model model) {
-        List<Todo> todos = todoService.todoList();
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if(user != null) {
+            String userEmail = user.getEmail();
+            List<Todo> todos = todoService.todoList(userEmail);
             model.addAttribute("userName", user.getName());
+            model.addAttribute("todo", todos);
         }
-        model.addAttribute("todo", todos);
+
         return "todoList";
     }
 
