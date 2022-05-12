@@ -14,12 +14,21 @@
 <body>
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
+        <div>
         <a href="/" class="navbar-brand mb-0 h1" >TODO-LIST</a>
-        <c:if test="${userName !=null}">
-        <p class="card-text">${userName}</p>
-        </c:if>
-        <a href="/oauth2/authorization/google" class="btn btn-outline-primary" role="button">Google Login</a>
-        <button type="button" class="btn btn-primary" onclick="location.href='/todo/new'">추가</button>
+        </div>
+        <div class="nav justify-content-end">
+        <c:choose>
+            <c:when test="${userName!=null}">
+            <p class="text-center mx-1">${userName}</>
+            <a href="/logout" class="btn btn-outline-primary mx-1" role="button">Logout</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/oauth2/authorization/google" class="btn btn-outline-primary mx-1" role="button">Google Login</a>
+            </c:otherwise>
+        </c:choose>
+        <button type="button" class="btn btn-primary mx-1" onclick="location.href='/todo/new'">추가</button>
+        </div>
     </div>
 </nav>
 

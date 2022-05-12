@@ -1,8 +1,6 @@
 package com.todo.simpletodoapp;
 
-import com.todo.simpletodoapp.domain.Todo;
-import com.todo.simpletodoapp.domain.TodoRepository;
-import com.todo.simpletodoapp.domain.TodoStatus;
+import com.todo.simpletodoapp.domain.*;
 import com.todo.simpletodoapp.web.TodoForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,10 +13,15 @@ import java.util.List;
 public class TodoService {
 
     private final TodoRepository todoRepository;
+    private final UserRepository userRepository;
 
     @Transactional
-    public void save(Todo todo) {
+    public void save(Todo todo, String userName) {
         todo.setStatus(TodoStatus.TODO);
+        User user = userRepository.findByName(userName).orElseThrow(()->{
+            return new IllegalArgumentException("name 찾기 실패");
+        });
+        todo.setUser(user);
         todoRepository.save(todo);
     }
 
@@ -41,7 +44,7 @@ public class TodoService {
     }
 
     @Transactional
-    public void statusUpdate(Long id) {
+    public void stateUpdate(Long id) {
         Todo findTodo = todoRepository.getById(id);
         if(findTodo.getStatus().getVal() == "todo") {
             findTodo.setStatus(TodoStatus.DOING);

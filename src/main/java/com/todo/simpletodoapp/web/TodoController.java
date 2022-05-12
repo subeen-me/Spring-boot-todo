@@ -45,11 +45,14 @@ public class TodoController {
         if(result.hasErrors()) {
             return "todoForm";
         }
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        String userName = user.getName();
 
         Todo todo = new Todo();
         todo.setName(form.getName());
         todo.setTitle(form.getTitle());
-        todoService.save(todo);
+
+        todoService.save(todo, userName);
 
         return "redirect:/";
     }
@@ -64,9 +67,9 @@ public class TodoController {
 
     @ResponseBody
     @PostMapping("/todo/{id}/update")
-    public void statusUpdate(@PathVariable("id") Long id) {
-        System.out.println("updateContoller 호출");
-        todoService.statusUpdate(id);
+    public void stateUpdate(@PathVariable("id") Long id) {
+        System.out.println("updateController 호출");
+        todoService.stateUpdate(id);
     }
 
     @ResponseBody

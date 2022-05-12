@@ -32,6 +32,10 @@ public class Todo {
     @Enumerated(EnumType.STRING)
     private TodoStatus status;
 
+    @ManyToOne(fetch = FetchType.EAGER) //Many = todo, User = One
+    @JoinColumn(name = "userId") //외래키
+    private User user;
+
     @CreatedDate
     private String createDate;
 
