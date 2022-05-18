@@ -33,7 +33,7 @@ public class Todo {
     private TodoStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY) //Many = todo, User = One
-    @JoinColumn(name = "userId") //외래키
+    @JoinColumn(name = "user_id") //외래키
     private User user;
 
     @CreatedDate

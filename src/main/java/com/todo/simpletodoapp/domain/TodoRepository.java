@@ -10,6 +10,6 @@ import java.util.List;
 public interface TodoRepository extends JpaRepository<Todo, Long>{
 
     // 내가 쓴 todo만 확인 가능
-    @Query(value = "SELECT * FROM todo WHERE userId = :userId", nativeQuery = true)
+    @Query(value = "SELECT * FROM todo WHERE user_id = :userId", nativeQuery = true)
     List<Todo> findAllByUserId(Long userId);
 }
