@@ -3,7 +3,6 @@ package com.todo.simpletodoapp.web;
 import com.todo.simpletodoapp.TodoService;
 import com.todo.simpletodoapp.config.auth.dto.SessionUser;
 import com.todo.simpletodoapp.domain.Todo;
-import com.todo.simpletodoapp.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,9 +47,7 @@ public class TodoController {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         String userEmail = user.getEmail();
 
-        Todo todo = new Todo();
-        todo.setName(form.getName());
-        todo.setTitle(form.getTitle());
+        Todo todo = Todo.createTodo(form);
 
         todoService.save(todo, userEmail);
 

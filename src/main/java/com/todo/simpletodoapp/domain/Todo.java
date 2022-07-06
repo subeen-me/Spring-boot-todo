@@ -1,8 +1,8 @@
 package com.todo.simpletodoapp.domain;
 
 
+import com.todo.simpletodoapp.web.TodoForm;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -51,6 +51,14 @@ public class Todo {
     @PreUpdate
     public void onPreUpdate() {
         this.editDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    public static Todo createTodo(TodoForm form) {
+        Todo todo = new Todo();
+        todo.setName(form.getName());
+        todo.setTitle(form.getTitle());
+        todo.setStatus(TodoStatus.TODO);
+        return todo;
     }
 
 }
