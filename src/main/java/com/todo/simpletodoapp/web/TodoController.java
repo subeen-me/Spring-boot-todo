@@ -47,9 +47,7 @@ public class TodoController {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         String userEmail = user.getEmail();
 
-        Todo todo = Todo.createTodo(form);
-
-        todoService.save(todo, userEmail);
+        todoService.save(form, userEmail);
 
         return "redirect:/";
     }

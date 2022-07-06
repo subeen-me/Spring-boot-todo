@@ -16,11 +16,12 @@ public class TodoService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void save(Todo todo, String userEmail) {
+    public void save(TodoForm form, String userEmail) {
         User user = userRepository.findByEmail(userEmail).orElseThrow(()->{
             return new IllegalArgumentException("Email 찾기 실패");
         });
 
+        Todo todo = Todo.createTodo(form);
         todo.setUser(user);
         todoRepository.save(todo);
     }
