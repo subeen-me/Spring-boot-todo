@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -42,6 +43,11 @@ public class TodoController {
     @PostMapping("/todo/new")
     public String save(@Valid TodoForm form, BindingResult result) {
         if(result.hasErrors()) {
+            result.getFieldErrors();
+            List<ObjectError> list = result.getAllErrors();
+            for(ObjectError e : list) {
+                System.out.println("ObjectError : " + e );
+            }
             return "todoForm";
         }
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
@@ -55,7 +61,10 @@ public class TodoController {
     @ResponseBody
     @PutMapping("/todo/{id}/edit")
     public void edit(@PathVariable("id") Long id,
-                     @RequestBody TodoForm form) {
+                     @Valid @RequestBody TodoForm form, BindingResult result) {
+        if(result.hasErrors()) {
+
+        }
         todoService.todoEdit(id, form);
     }
 
